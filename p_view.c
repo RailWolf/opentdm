@@ -458,7 +458,7 @@ void SV_CalcBlend (edict_t *ent)
 		remaining = ent->client->quad_framenum - level.framenum;
 		if (remaining == SECS_TO_FRAMES(3))	// beginning to fade
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/damage2.wav"), 1, ATTN_NORM, 0);
-		if (remaining > SECS_TO_FRAMES(3) || (remaining & 4) )
+		if (remaining > SECS_TO_FRAMES(3) || ((remaining / SECS_TO_FRAMES(0.1f)) & 4))
 			SV_AddBlend (0, 0, 1, 0.08f, ent->client->ps.blend);
 	}
 	else if (ent->client->invincible_framenum > level.framenum)
@@ -466,7 +466,7 @@ void SV_CalcBlend (edict_t *ent)
 		remaining = ent->client->invincible_framenum - level.framenum;
 		if (remaining == SECS_TO_FRAMES(3))	// beginning to fade
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/protect2.wav"), 1, ATTN_NORM, 0);
-		if (remaining > SECS_TO_FRAMES(3) || (remaining & 4) )
+		if (remaining > SECS_TO_FRAMES(3) || ((remaining / SECS_TO_FRAMES(0.1f)) & 4))
 			SV_AddBlend (1, 1, 0, 0.08f, ent->client->ps.blend);
 	}
 	else if (ent->client->enviro_framenum > level.framenum)
@@ -474,7 +474,7 @@ void SV_CalcBlend (edict_t *ent)
 		remaining = ent->client->enviro_framenum - level.framenum;
 		if (remaining == SECS_TO_FRAMES(3))	// beginning to fade
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/airout.wav"), 1, ATTN_NORM, 0);
-		if (remaining > SECS_TO_FRAMES(3) || (remaining & 4) )
+		if (remaining > SECS_TO_FRAMES(3) || ((remaining / SECS_TO_FRAMES(0.1f)) & 4))
 			SV_AddBlend (0, 1, 0, 0.08f, ent->client->ps.blend);
 	}
 	else if (ent->client->breather_framenum > level.framenum)
@@ -482,7 +482,7 @@ void SV_CalcBlend (edict_t *ent)
 		remaining = ent->client->breather_framenum - level.framenum;
 		if (remaining == SECS_TO_FRAMES(3))	// beginning to fade
 			gi.sound(ent, CHAN_ITEM, gi.soundindex("items/airout.wav"), 1, ATTN_NORM, 0);
-		if (remaining > SECS_TO_FRAMES(3) || (remaining & 4) )
+		if (remaining > SECS_TO_FRAMES(3) || ((remaining / SECS_TO_FRAMES(0.1f)) & 4))
 			SV_AddBlend (0.4f, 1, 0.4f, 0.04f, ent->client->ps.blend);
 	}
 
@@ -495,12 +495,12 @@ void SV_CalcBlend (edict_t *ent)
 		SV_AddBlend (0.85f, 0.7f, 0.3f, ent->client->bonus_alpha, ent->client->ps.blend);
 
 	// drop the damage value
-	ent->client->damage_alpha -= 0.06f;
+	ent->client->damage_alpha -= 0.6f*FRAMETIME;
 	if (ent->client->damage_alpha < 0)
 		ent->client->damage_alpha = 0;
 
 	// drop the bonus value
-	ent->client->bonus_alpha -= 0.1f;
+	ent->client->bonus_alpha -= 1.0f*FRAMETIME;
 	if (ent->client->bonus_alpha < 0)
 		ent->client->bonus_alpha = 0;
 }
@@ -671,7 +671,7 @@ void P_WorldEffects (void)
 		{
 			current_player->air_finished_framenum = level.framenum + SECS_TO_FRAMES(10);
 
-			if (((int)(current_client->breather_framenum - level.framenum) % 25) == 0)
+			if (((current_client->breather_framenum - level.framenum) % (25*SECS_TO_FRAMES(0.1f))) == 0)
 			{
 				if (!current_client->breather_sound)
 					gi.sound (current_player, CHAN_AUTO, gi.soundindex("player/u_breath1.wav"), 1, ATTN_NORM, 0);
@@ -794,14 +794,14 @@ void G_SetClientEffects (edict_t *ent)
 	if (ent->client->quad_framenum > level.framenum)
 	{
 		remaining = ent->client->quad_framenum - level.framenum;
-		if (remaining > 30 || (remaining & 4) )
+		if (remaining > SECS_TO_FRAMES(3) || ((remaining / SECS_TO_FRAMES(0.1f)) & 4))
 			ent->s.effects |= EF_QUAD;
 	}
 
 	if (ent->client->invincible_framenum > level.framenum)
 	{
 		remaining = ent->client->invincible_framenum - level.framenum;
-		if (remaining > 30 || (remaining & 4) )
+		if (remaining > SECS_TO_FRAMES(3) || ((remaining / SECS_TO_FRAMES(0.1f)) & 4))
 			ent->s.effects |= EF_PENT;
 	}
 
@@ -1147,10 +1147,9 @@ void ClientEndServerFrame (edict_t *ent)
 
 	// if the scoreboard is up, update it
 	// wision: update every 15 frames during timeout/warmup
-	// FIXME: maybe use SECS_TO_FRAMES because of sv_fps?
 	if (ent->client->showscores &&
-			((!(level.realframenum & 31) && tdm_match_status != MM_WARMUP && tdm_match_status != MM_TIMEOUT) || 
-			(!(level.realframenum & 15) && (tdm_match_status == MM_WARMUP || tdm_match_status == MM_TIMEOUT))))
+			((!(level.realframenum % SECS_TO_FRAMES(3)) && tdm_match_status != MM_WARMUP && tdm_match_status != MM_TIMEOUT) ||
+			(!(level.realframenum % SECS_TO_FRAMES(1.5f)) && (tdm_match_status == MM_WARMUP || tdm_match_status == MM_TIMEOUT))))
 	{
 		//DeathmatchScoreboardMessage (ent, ent->enemy);
 		gi.WriteByte (svc_layout);
