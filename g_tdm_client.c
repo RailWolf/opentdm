@@ -786,7 +786,10 @@ void TDM_PlayerConfigDownloaded (tdm_download_t *download, int code, byte *buff,
 	playerconfig_t	config;
 
 	if (!download->initiator)
+	{
+		download->inuse = false;
 		return;
+	}
 
 	if (buff)
 	{
@@ -814,6 +817,8 @@ void TDM_PlayerConfigDownloaded (tdm_download_t *download, int code, byte *buff,
 
 	//wision: set up the dm_statusbar according the config and send it to the client
 	TDM_SendStatusBarCS (download->initiator);
+
+	download->inuse = false;
 }
 
 /*

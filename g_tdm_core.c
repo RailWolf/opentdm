@@ -3119,6 +3119,10 @@ void TDM_HandleDownload (tdm_download_t *download, char *buff, int len, int code
 	if (!download->inuse)
 		return;
 
+	//FIXME: observed a crash here due to NULL initiator
+	if (!download->initiator)
+		TDM_Error("TDM_HandleDownload: NULL initiator");
+
 	//player left before download finished, lame!
 	//note on an extremely poor connection it's possible another player since occupied their slot, but
 	//for that to happen, the download must take 3+ seconds which should be unrealistic, so i don't
