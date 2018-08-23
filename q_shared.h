@@ -160,7 +160,11 @@ typedef uint64_t uint64;
 #define Q_strncasecmp strncasecmp
 #define EXPORT
 #define IMPORT
+#ifdef __clang__
+#define DLL_EXPORT __attribute__((visibility("default")))
+#else
 #define DLL_EXPORT __attribute__((visibility("default"), externally_visible))
+#endif
 void Q_strlwr (char *str);
 int Q_vsnprintf (char *buff, size_t len, const char *fmt, va_list va);
 //int Q_snprintf (char *buff, size_t len, const char *fmt, ...);
