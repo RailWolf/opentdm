@@ -207,11 +207,11 @@ int		Q_rand (int *seed);
 #define Q_brandom(seed,a,b)	((a)+Q_random(seed)*((b)-(a)))						// a..b
 #define Q_crandom(seed)		Q_brandom(seed,-1,1)
 
-unsigned long genrand_int32(void);
-long genrand_int31(void);
+uint32 genrand_int32(void);
+int32 genrand_int31(void);
 double genrand_float32_full(void);
 double genrand_float32_notone(void);
-void init_genrand(unsigned long s);
+void init_genrand(uint32 s);
 
 //#define	frand()		(random())
 //#define	crand()		(((int)randomMT() - 0x7FFFFFFF) * 0.000000000465661287307739257812f)
