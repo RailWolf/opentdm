@@ -102,7 +102,7 @@ void DoRespawn (edict_t *ent)
 		for (count = 0, ent = master; ent; ent = ent->chain, count++)
 			;
 
-		choice = genrand_int32() % count;
+		choice = genrand_uniform (count);
 
 		for (count = 0, ent = master; count < choice; ent = ent->chain, count++)
 			;

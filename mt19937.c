@@ -10,6 +10,7 @@
 static uint32 mt_state[N];
 static uint32 mt_index;
 
+// Seed PRNG with initial value
 void init_genrand(uint32 seed)
 {
     int i;
@@ -20,6 +21,7 @@ void init_genrand(uint32 seed)
         mt_state[i] = seed = 1812433253U * (seed ^ seed >> 30) + i;
 }
 
+// Generate random integer in range [0, 2^32)
 uint32 genrand_int32(void)
 {
     uint32 x, y;
@@ -50,4 +52,20 @@ uint32 genrand_int32(void)
     y ^= y >> 18;
 
     return y;
+}
+
+// Generate random integer in range [0, n) avoiding modulo bias
+uint32 genrand_uniform(uint32 n)
+{
+    uint32 r, m;
+
+    if (n < 2)
+        return 0;
+
+    m = -n % n; // 2^32 mod n
+    do {
+        r = genrand_int32();
+    } while (r < m);
+
+    return r % n;
 }

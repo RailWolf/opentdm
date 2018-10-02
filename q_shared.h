@@ -199,8 +199,9 @@ typedef enum {false, true}	qboolean;
 #define random()	((int32)genrand_int32() * (1.0f / 4294967296.0f) + 0.5f)	//  0..1
 #define crandom()	((int32)genrand_int32() * (1.0f / 2147483648.0f))			// -1..1
 
-uint32 genrand_int32(void);
 void init_genrand(uint32 s);
+uint32 genrand_int32(void);
+uint32 genrand_uniform(uint32 n);
 
 #ifndef NULL
 #define NULL ((void *)0)
