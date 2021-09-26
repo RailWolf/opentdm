@@ -21,9 +21,8 @@ WINDRES ?= windres
 STRIP ?= strip
 RM ?= rm -f
 
-CFLAGS ?= -O2 -g -Wall -Wno-unused -MMD $(INCLUDES)
-LDFLAGS ?= -shared
-LIBS ?=
+CFLAGS += -O2 -g -Wall -Wno-unused -MMD $(INCLUDES)
+LDFLAGS += -shared
 
 ifdef CONFIG_WINDOWS
     LDFLAGS += -mconsole
