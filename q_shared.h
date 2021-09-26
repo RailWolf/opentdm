@@ -119,7 +119,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define filelength _filelength
 #define stricmp _stricmp
 #define putenv _putenv
-#if defined __GNUC__ && !defined _WIN64
+#if defined __GNUC__ && !defined _WIN64 && !defined __clang__
 #define EXPORT __attribute__((callee_pop_aggregate_return(0)))
 #define IMPORT __attribute__((callee_pop_aggregate_return(0)))
 #else
