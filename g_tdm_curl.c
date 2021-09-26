@@ -176,15 +176,7 @@ oversize:
 int EXPORT CURL_Debug (CURL *c, curl_infotype type, char *data, size_t size, void * ptr)
 {
 	if (type == CURLINFO_TEXT)
-	{
-		char	buff[4096];
-		if (size > sizeof(buff)-1)
-			size = sizeof(buff)-1;
-		Q_strncpy (buff, data, size);
-		gi.dprintf ("  OpenTDM HTTP DEBUG: %s", buff);
-		if (!strchr (buff, '\n'))
-			gi.dprintf ("\n");
-	}
+		gi.dprintf ("  OpenTDM HTTP DEBUG: %s", data);
 
 	return 0;
 }
