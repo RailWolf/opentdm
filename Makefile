@@ -27,6 +27,7 @@ LDFLAGS += -shared
 ifdef CONFIG_WINDOWS
     LDFLAGS += -mconsole
     LDFLAGS += -Wl,--nxcompat,--dynamicbase
+    LDFLAGS += -static-libgcc
 else
     CFLAGS += -fPIC -fvisibility=hidden
     LDFLAGS += -Wl,--no-undefined
