@@ -2203,14 +2203,12 @@ void TDM_SetupSpawns (void)
 
 	while ((spot = G_Find (spot, FOFS(classname), "info_player_deathmatch")) != NULL)
 	{
-		level.spawns[count] = spot;
-		count++;
-
-		if (count > TDM_MAX_MAP_SPAWNPOINTS)
+		if (count == TDM_MAX_MAP_SPAWNPOINTS)
 		{
 			TDM_Error ("TDM_SetupSpawns: too many spawn points");
 			break;
 		}
+		level.spawns[count++] = spot;
 	}
 
 	level.numspawns = count;
