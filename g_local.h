@@ -934,7 +934,6 @@ char	*G_StripQuotes (char *string);
 
 char	*G_CopyString (const char *in);
 
-float	*tv (float x, float y, float z);
 char	*vtos (vec3_t v);
 
 float vectoyaw (vec3_t vec);
