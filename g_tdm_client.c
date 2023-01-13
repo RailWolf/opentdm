@@ -582,69 +582,69 @@ const char *TDM_CreatePlayerDmStatusBar (playerconfig_t *c)
 	}
 
 	dm_statusbar = va (
-"yb	-24 "
+"yb -24 "
 
 // health
-"xv	0 "
+"xv 0 "
 "hnum "
-"xv	50 "
+"xv 50 "
 "pic 0 "
 
 // ammo
 "if 2 "
-"	xv	100 "
-"	anum "
-"	xv	150 "
-"	pic 2 "
+  "xv 100 "
+  "anum "
+  "xv 150 "
+  "pic 2 "
 "endif "
 
 // armor
 "if 4 "
-"	xv	200 "
-"	rnum "
-"	xv	250 "
-"	pic 4 "
+  "xv 200 "
+  "rnum "
+  "xv 250 "
+  "pic 4 "
 "endif "
 
 // selected item
 "if 6 "
-"	xv	296 "
-"	pic 6 "
+  "xv 296 "
+  "pic 6 "
 "endif "
 
-"yb	-50 "
+"yb -50 "
 
 // picked up item
 "if 7 "
-"	xv	0 "
-"	pic 7 "
-"	xv	26 "
-"	yb	-42 "
-"	stat_string 8 "
-"	yb	-50 "
+  "xv 0 "
+  "pic 7 "
+  "xv 26 "
+  "yb -42 "
+  "stat_string 8 "
+  "yb -50 "
 "endif "
 
 // timer (quad, rebreather, envirosuit)
 "if 9 "
-"	xv	246 "
-"	num	2	10 "
-"	xv	296 "
-"	pic	9 "
+  "xv 246 "
+  "num 2 10 "
+  "xv 296 "
+  "pic 9 "
 "endif "
 
-//  help / weapon icon 
+// help / weapon icon
 "if 11 "
-"	xv	148 "
-"	pic	11 "
+  "xv 148 "
+  "pic 11 "
 "endif "
 
 // timer (pent)
 "if 29 "
-"   yb  -80 "
-"	xv	246 "
-"	num	2	30 "
-"	xv	296 "
-"	pic	29 "
+  "yb -80 "
+  "xv 246 "
+  "num 2 30 "
+  "xv 296 "
+  "pic 29 "
 "endif "
 
 // First team name
@@ -679,18 +679,18 @@ const char *TDM_CreatePlayerDmStatusBar (playerconfig_t *c)
 
 // Timeout message
 "if 25 "
-	"xr -58 "
-	"yt 50 "
-	"string \"Timeout\" "
+  "xr -58 "
+  "yt 50 "
+  "string \"Timeout\" "
 
-	// Timeout value
-	"xr -42 "
-	"yt 58 "
-	"stat_string 25 "
+  // Timeout value
+  "xr -42 "
+  "yt 58 "
+  "stat_string 25 "
 "endif "
 
-//  frags
-"xr	-50 "
+// frags
+"xr -50 "
 "yt 2 "
 "num 3 31 "
 
