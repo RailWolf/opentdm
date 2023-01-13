@@ -59,9 +59,6 @@ g_tdm_votemenu.o q_shared.o
 ifdef CONFIG_WINDOWS
     OBJS += sys_win32.o
     OBJS += opentdm.o
-    ifdef CONFIG_HTTP
-        LIBS += -lws2_32
-    endif
     TARGET := game$(CPU).dll
 else
     OBJS += sys_linux.o

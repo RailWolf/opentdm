@@ -275,8 +275,8 @@ void InitGame (void)
 	g_1v1_spawn_mode = gi.cvar ("g_1v1_spawn_mode", "1", 0);
 	g_tdm_spawn_mode = gi.cvar ("g_tdm_spawn_mode", "1", 0);
 	
-	g_http_path = gi.cvar ("g_http_path", "/api/", CVAR_NOSET);
-	g_http_domain = gi.cvar ("g_http_domain", "opentdm.net", CVAR_NOSET);
+	g_http_path = gi.cvar ("g_http_path", "/api/", 0);
+	g_http_domain = gi.cvar ("g_http_domain", "opentdm.net", 0);
 
 	// items
 	InitItems ();	
