@@ -681,7 +681,7 @@ const char *TDM_CreatePlayerDmStatusBar (playerconfig_t *c)
 "if 25 "
   "xr -58 "
   "yt 50 "
-  "string \"Timeout\" "
+  "string Timeout "
 
   // Timeout value
   "xr -42 "
@@ -705,7 +705,7 @@ const char *TDM_CreatePlayerDmStatusBar (playerconfig_t *c)
 "if 16 "
   "xv 0 "
   "yb -68 "
-  "string \"Chasing\" "
+  "string Chasing "
   "xv 64 "
   "stat_string 16 "
 "endif "
