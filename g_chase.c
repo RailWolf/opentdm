@@ -187,6 +187,9 @@ void UpdateChaseCam(edict_t *ent)
 			VectorCopy(trace.endpos, goal);
 			goal[2] += 6;
 		}
+	} else {
+		TDM_Error ("UpdateChaseCam: bad chase_mode");
+		return;
 	}
 
 	VectorCopy(goal, ent->s.origin);

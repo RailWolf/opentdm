@@ -18,7 +18,7 @@ void JoinTeam2 (edict_t *ent);
 void ToggleChaseCam (edict_t *ent);
 void SelectNextHelpPage (edict_t *ent);
 void TDM_UpdateTeamNames (void);
-void TDM_SetSkins ();
+void TDM_SetSkins (void);
 void TDM_SetTeamSkins (edict_t *cl, edict_t *target_to_set_skins_for);
 void TDM_SetAllTeamSkins (edict_t *target_to_set_skins_for);
 void TDM_SaveDefaultCvars (void);

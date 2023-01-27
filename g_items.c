@@ -871,7 +871,6 @@ void droptofloor (edict_t *ent)
 {
 	trace_t		tr;
 	vec3_t		dest;
-	float		*v;
 
 	VectorSet (ent->mins, -15, -15, -15);
 	VectorSet (ent->maxs, 15, 15, 15);
